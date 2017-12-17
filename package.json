@@ -1,0 +1,65 @@
+{
+  "name": "dapp-mailer",
+  "description": "The Giveth Dapp Mailer Notification System",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "Satya van Heummen",
+    "email": "satya.vh@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "scripts": {
+    "test": "npm run eslint && npm run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "build": "./node_modules/.bin/babel -d ./build src",
+    "start": "babel-watch src",
+    "mocha": "mocha test/ --recursive --exit"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "feathers": "^2.2.3",
+    "feathers-configuration": "^0.4.2",
+    "feathers-errors": "^2.9.2",
+    "feathers-hooks": "^2.1.2",
+    "feathers-hooks-common": "^3.10.0",
+    "feathers-mongoose": "^6.0.0",
+    "feathers-rest": "^1.8.1",
+    "feathers-socketio": "^2.0.1",
+    "helmet": "^3.9.0",
+    "mail-time": "^0.1.7",
+    "mongoose": "^4.13.7",
+    "node-mailer": "^0.1.1",
+    "nodemailer-mailgun-transport": "^1.3.6",
+    "serve-favicon": "^2.4.5",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babel-watch": "^2.0.7",
+    "eslint": "^4.13.1",
+    "mocha": "^4.0.1",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}
