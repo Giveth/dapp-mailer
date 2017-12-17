@@ -7,43 +7,40 @@ transports.push(nodemailer.createTransport({
   port: 587,
   from: 'no-reply@giveth.io',
   auth: {
-    user: 'postmaster@mg.giveth.io',
-    pass: '6a21583a4a3b9850bbd3a12037232f5e'
+    user: 'dapp-mailer@mg.giveth.io',
+    pass: '3wN%Q^4hY@jkGz%h!!*wK1TmvfNwYs'
   },
 }));
 
 const createServer = (app, db) => {
-  const mongo = app.get('MongoDB');
+  console.log('creating mailtime server');  
 
   const MailQueue = new MailTime({
     db, // MongoDB
     type: 'server',
-    strategy: 'balancer', // Transports will be used in round robin chain
+    strategy: 'backup', // Transports will be used in round robin chain
     transports,
-    from(transport) {
+    from() {
       // To pass spam-filters `from` field should be correctly set
       // for each transport, check `transport` object for more options
-      return '"Awesome App" <' + transport._options.from + '>';
+      return "Giveth <no-reply@giveth.io>";
     },
-    concatEmails: true, // Concatenate emails to the same addressee
-    concatDelimiter: '<h1>{{{subject}}}</h1>', // Start each concatenated email with it's own subject
-    template: MailTime.Template // Use default template
+    concatEmails: false, // Concatenate emails to the same addressee
+    debug: true
   });
 }
 
-const createClient = (app,   db) => {
-  console.log('MongoDB', call);  
-  const mongo = app.get('MongoDB');
-
+const createClient = (app, db) => {
+  console.log('creating mailtime client mqClient');  
 
   const MailQueue = new MailTime({
-    mongo, // MongoDB
+    db, // MongoDB
+    transports,
     type: 'client',
-    strategy: 'balancer', // Transports will be used in round robin chain
-    concatEmails: true // Concatenate emails to the same address
+    debug: true
   });  
 
-  app.set('MailQueue', MailQueue);
+  app.set('mqClient', MailQueue);
 }
 
 module.exports = {

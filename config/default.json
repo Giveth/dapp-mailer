@@ -1,10 +1,12 @@
 {
-  "host": "localhost",
+  "host": "localhost:3030",
   "port": 3030,
   "public": "../public/",
+  "templates": "/private/email_templates",
   "paginate": {
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://localhost:27017/dapp-mailer"
+  "mongodb": "mongodb://localhost:27017/dapp-mailer",
+  "apiSecret": "NZult$TmNrzgKzY1h3%bwil&1QVhqT"
 }

@@ -42,6 +42,13 @@ app.configure(mongoose);
 app.configure(rest());
 app.configure(socketio());
 
+// Add additional headers
+app.use(function(req, res, next) { 
+  req.feathers.headers = req.headers;  
+  req.useragent = req.useragent;
+  next(); 
+});
+
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
 

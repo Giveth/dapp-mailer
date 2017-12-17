@@ -29,6 +29,7 @@
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
+    "@feathersjs/errors": "^3.2.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
@@ -40,6 +41,7 @@
     "feathers-mongoose": "^6.0.0",
     "feathers-rest": "^1.8.1",
     "feathers-socketio": "^2.0.1",
+    "fs": "^0.0.1-security",
     "helmet": "^3.9.0",
     "mail-time": "^0.1.7",
     "mongoose": "^4.13.7",

@@ -9,10 +9,10 @@ module.exports = function () {
   });
 
   promise.then(function(db) {
-    console.log('db ready', MailTime);
-    // // app.set('MongoDB', db);
-    // mt.createServer(app, db);
-    // mt.createClient(app, db);    
+    // we need to create the mailtime server and client after database loads
+    // because db instance needs to be passed
+    mt.createServer(app, db);
+    mt.createClient(app, db);    
   })
 
   mongoose.Promise = global.Promise;
