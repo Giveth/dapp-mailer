@@ -7,8 +7,8 @@ transports.push(nodemailer.createTransport({
   port: 587,
   from: 'no-reply@giveth.io',
   auth: {
-    user: 'dapp-mailer@mg.giveth.io',
-    pass: '3wN%Q^4hY@jkGz%h!!*wK1TmvfNwYs'
+    user: 'postmaster@mg.giveth.io',
+    pass: '3c6aeaaa77ed25ab504909cc43b5f1d7'
   },
 }));
 

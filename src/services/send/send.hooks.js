@@ -1,5 +1,6 @@
 import isAuthorized from './../../hooks/isAuthorized';
 const fs = require('fs');
+const Mustache = require('mustache');
 
 const loadTemplate = (app, type) => {
   return new Promise((resolve, reject) => {
@@ -13,17 +14,22 @@ const loadTemplate = (app, type) => {
 const sendEmail = () => (hook) => {
   const { params, data, service, app } = hook;
 
-  const host = app.get('env') === 'development' ? "127.0.0.1:3030" : app.get('host');
+  const host = app.get('env') === 'development' ? "http://127.0.0.1:3030" : app.get('host');
   console.log('host', host);
 
   return loadTemplate(app, data.type).then((template) => {
+    const props = {
+      user: "Satya",
+      baseUrl: host      
+    }
+
+    const temp = Mustache.render(template, props);
+    console.log('temp', temp);
+
     app.get('mqClient').sendMail({
       to: 'satya.vh@gmail.com',
       subject: 'You\'ve got an email!',
-      user: "Satya",
-      html: template,
-      template: "{{{html}}}",
-      baseUrl: host
+      html: temp,
     }, (err, res) => {
       console.log('queue email', err, res);
     });  

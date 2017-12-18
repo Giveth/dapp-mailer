@@ -45,6 +45,7 @@
     "helmet": "^3.9.0",
     "mail-time": "^0.1.7",
     "mongoose": "^4.13.7",
+    "mustache": "^2.3.0",
     "node-mailer": "^0.1.1",
     "nodemailer-mailgun-transport": "^1.3.6",
     "serve-favicon": "^2.4.5",
