@@ -13,6 +13,7 @@ const socketio = require('feathers-socketio');
 
 const errorHandler = require('feathers-errors/handler');
 const notFound = require('feathers-errors/not-found');
+import unsubscribeMeService from './services/unsubscribeMeService';
 
 const middleware = require('./middleware');
 const services = require('./services');
@@ -55,6 +56,11 @@ app.configure(middleware);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 
+// set view engine to react for server side rendering
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jsx');
+app.engine('jsx', require('express-react-views').createEngine());
+
 // Configure a middleware for 404s and the error handler
 const publicUri = app.get('public');
 
@@ -65,6 +71,12 @@ app.use(errorHandler({
     404: publicUri + "/404.html"
   }
 }));
+
+// route for our unsubscribe page
+app.get('/unsubscribe-me', (req, res) => {
+  unsubscribeMeService(app, req, res);
+});
+
 
 app.hooks(appHooks);
 

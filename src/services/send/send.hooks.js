@@ -21,12 +21,14 @@ const loadTemplate = (app, type) => {
 const sendEmail = () => (hook) => {
   const { params, data, service, app } = hook;
   const host = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
+  const unsubscribeUrl = host + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.type
 
   checkRequiredKeys(['recipient', 'subject', 'type'], data);
 
   // props should come from data
   const templateProps = _.extend(data, {
-    baseUrl: host      
+    baseUrl: host,
+    unsubscribeUrl: unsubscribeUrl     
   })
 
   // first we do a quick check if recipient is unsubscribed for this type of email before sending
@@ -40,7 +42,7 @@ const sendEmail = () => (hook) => {
         return hook;
       }
 
-      console.log('proceed with sending');
+      console.log('proceed with sending', unsubscribeUrl);
 
       return loadTemplate(app, data.type)
         .then((template) => {
