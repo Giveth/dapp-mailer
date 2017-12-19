@@ -1,14 +1,14 @@
-
+import onlyInternal from './../../hooks/onlyInternal';
 
 module.exports = {
   before: {
     all: [],
-    find: [],
-    get: [],
+    find: [onlyInternal()],
+    get: [onlyInternal()],
     create: [],
-    update: [],
-    patch: [],
-    remove: []
+    update: [onlyInternal()],
+    patch: [onlyInternal()],
+    remove: [onlyInternal()]
   },
 
   after: {

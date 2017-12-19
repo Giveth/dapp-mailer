@@ -1,6 +1,6 @@
 {
-  "host": "localhost:3030",
-  "port": 3030,
+  "host": "localhost:3050",
+  "port": 3050,
   "public": "../public/",
   "templates": "/private/email_templates",
   "paginate": {

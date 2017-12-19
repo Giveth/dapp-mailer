@@ -1,11 +1,18 @@
 import isAuthorized from './../../hooks/isAuthorized';
+import checkRequiredKeys from './../../hooks/checkRequiredKeys';
+
 const fs = require('fs');
 const Mustache = require('mustache');
+const _ = require('lodash');
+import errors from '@feathersjs/errors';
 
 const loadTemplate = (app, type) => {
   return new Promise((resolve, reject) => {
     fs.readFile(process.env.PWD + app.get('templates') + '/' + type + '.html', (err, data) => {
-      if (err) { reject() };
+      if (err || data === undefined) { 
+        reject(); 
+        return 
+      };
       resolve(data.toString());
     });
   })
@@ -13,33 +20,55 @@ const loadTemplate = (app, type) => {
 
 const sendEmail = () => (hook) => {
   const { params, data, service, app } = hook;
+  const host = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
 
-  const host = app.get('env') === 'development' ? "http://127.0.0.1:3030" : app.get('host');
-  console.log('host', host);
+  checkRequiredKeys(['recipient', 'subject', 'type'], data);
 
-  return loadTemplate(app, data.type).then((template) => {
-    const props = {
-      user: "Satya",
-      baseUrl: host      
-    }
-
-    const temp = Mustache.render(template, props);
-    console.log('temp', temp);
-
-    app.get('mqClient').sendMail({
-      to: 'satya.vh@gmail.com',
-      subject: 'You\'ve got an email!',
-      html: temp,
-    }, (err, res) => {
-      console.log('queue email', err, res);
-    });  
-
-    hook.result = {
-      success: true
-    }  
-
-    return hook;
+  // props should come from data
+  const templateProps = _.extend(data, {
+    baseUrl: host      
   })
+
+  // first we do a quick check if recipient is unsubscribed for this type of email before sending
+  return app.service('/unsubscribe').find({ query: {email: data.recipient, type: data.type, $limit: 0}})
+    .then((unsubscribes) => {
+      if(unsubscribes.total > 0) {
+        hook.result = {
+          success: false,
+          reason: 'recipient is unsubscribed'
+        }  
+        return hook;
+      }
+
+      console.log('proceed with sending');
+
+      return loadTemplate(app, data.type)
+        .then((template) => {
+
+          // render the template Mustach tags with the props
+          // we don't use MailQueue for rendering props, it does not work
+          template = Mustache.render(template, templateProps);
+
+          // now send the email
+          app.get('mqClient').sendMail({
+            to: data.recipient,
+            subject: data.subject,
+            html: template,
+          });
+
+          hook.result = { success: true }  
+          return hook;
+        })
+        .catch((e) => {
+          hook.result = {
+            success: false,
+            reason: 'email type not found'
+          }  
+          return hook;      
+        })
+
+    })
+    .catch((e) => console.log(e));        
 }
 
 module.exports = {

@@ -1,8 +1,8 @@
-// Initializes the `schedule` service on path `/schedule`
+// Initializes the `unsubscribe` service on path `/unsubscribe`
 const createService = require('feathers-mongoose');
-const createModel = require('../../models/schedule.model');
-const hooks = require('./schedule.hooks');
-const filters = require('./schedule.filters');
+const createModel = require('../../models/unsubscribe.model');
+const hooks = require('./unsubscribe.hooks');
+const filters = require('./unsubscribe.filters');
 
 module.exports = function () {
   const app = this;
@@ -10,16 +10,16 @@ module.exports = function () {
   const paginate = app.get('paginate');
 
   const options = {
-    name: 'schedule',
+    name: 'unsubscribe',
     Model,
     paginate
   };
 
   // Initialize our service with any options it requires
-  app.use('/schedule', createService(options));
+  app.use('/unsubscribe', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('schedule');
+  const service = app.service('unsubscribe');
 
   service.hooks(hooks);
 
