@@ -11,19 +11,22 @@ export default function(app, req, res) {
 
       if(unsubscribes.data.length > 0) {
         res.render('UnsubscribeMessage', {  
-          message: 'You are already unsubscribed'
+          message: 'You are already unsubscribed :-)'
         }); 
       } else {
+
+        // create a new unsubscribe for this email
         service.create({ 
           email: recipient,
           type: type
         }).then((e) => {
           res.render('UnsubscribeMessage', {  
-            message: "You've been successfully unsubscribed from this type of email"
-          });           
+            message: "You've been successfully unsubscribed from this type of email!"
+          });       
+
         }).catch((e) => {
           res.render('UnsubscribeMessage', {  
-            message: "Oops, something went wrong. Please contact support at support@giveth.io"
+            message: "Oops, something went wrong :-( Please contact support at support@giveth.io"
           });           
         })
       }
