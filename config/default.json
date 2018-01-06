@@ -1,5 +1,5 @@
 {
-  "host": "localhost:3050",
+  "host": "localhost",
   "port": 3050,
   "public": "../public/",
   "templates": "/private/email_templates",
