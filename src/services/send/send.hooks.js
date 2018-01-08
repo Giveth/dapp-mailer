@@ -20,14 +20,16 @@ const loadTemplate = (app, type) => {
 
 const sendEmail = () => (hook) => {
   const { params, data, service, app } = hook;
-  const host = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
-  const unsubscribeUrl = host + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.type
+  const hostUrl = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
+  const unsubscribeUrl = hostUrl + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.type
 
   checkRequiredKeys(['recipient', 'subject', 'type'], data);
 
+  console.log(data)
+
   // props should come from data
   const templateProps = _.extend(data, {
-    baseUrl: host,
+    hostUrl: hostUrl,
     unsubscribeUrl: unsubscribeUrl     
   })
 
