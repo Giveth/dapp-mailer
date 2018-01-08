@@ -8,5 +8,10 @@
     "max": 50
   },
   "mongodb": "mongodb://localhost:27017/dapp-mailer",
-  "apiSecret": "NZult$TmNrzgKzY1h3%bwil&1QVhqT"
+  "apiSecret": "",
+  "mailSender": "",
+  "nodemailer": {
+    "transportUser": "",
+    "transportPass": ""
+  } 
 }

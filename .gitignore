@@ -112,3 +112,5 @@ lib/
 data/
 *.sublime-workspace
 *.sublime-project
+config/production.json
+config/dev.json

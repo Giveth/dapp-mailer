@@ -1,27 +1,35 @@
-const path = require('path');
-const favicon = require('serve-favicon');
-const compress = require('compression');
-const cors = require('cors');
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
+'use strict';
 
-const feathers = require('feathers');
-const configuration = require('feathers-configuration');
-const hooks = require('feathers-hooks');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
+var _unsubscribeMeService = require('./services/unsubscribeMeService');
 
-const errorHandler = require('feathers-errors/handler');
-const notFound = require('feathers-errors/not-found');
-import unsubscribeMeService from './services/unsubscribeMeService';
+var _unsubscribeMeService2 = _interopRequireDefault(_unsubscribeMeService);
 
-const middleware = require('./middleware');
-const services = require('./services');
-const appHooks = require('./app.hooks');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const mongoose = require('./mongoose');
+var path = require('path');
+var favicon = require('serve-favicon');
+var compress = require('compression');
+var cors = require('cors');
+var helmet = require('helmet');
+var bodyParser = require('body-parser');
 
-const app = feathers();
+var feathers = require('feathers');
+var configuration = require('feathers-configuration');
+var hooks = require('feathers-hooks');
+var rest = require('feathers-rest');
+var socketio = require('feathers-socketio');
+
+var errorHandler = require('feathers-errors/handler');
+var notFound = require('feathers-errors/not-found');
+
+
+var middleware = require('./middleware');
+var services = require('./services');
+var appHooks = require('./app.hooks');
+
+var mongoose = require('./mongoose');
+
+var app = feathers();
 
 // Load app configuration
 app.configure(configuration());
@@ -44,10 +52,10 @@ app.configure(rest());
 app.configure(socketio());
 
 // Add additional headers
-app.use(function(req, res, next) { 
-  req.feathers.headers = req.headers;  
+app.use(function (req, res, next) {
+  req.feathers.headers = req.headers;
   req.useragent = req.useragent;
-  next(); 
+  next();
 });
 
 // Configure other middleware (see `middleware/index.js`)
@@ -66,21 +74,20 @@ if (app.get('env') === 'development') {
 }
 
 // Configure a middleware for 404s and the error handler
-const publicUri = app.get('public');
+var publicUri = app.get('public');
 
 app.use(errorHandler({
   html: {
     // strings should point to html files
-    403: publicUri + "/403.html",    
+    403: publicUri + "/403.html",
     404: publicUri + "/404.html"
   }
 }));
 
 // route for our unsubscribe page
-app.get('/unsubscribe-me', (req, res) => {
-  unsubscribeMeService(app, req, res);
+app.get('/unsubscribe-me', function (req, res) {
+  (0, _unsubscribeMeService2.default)(app, req, res);
 });
-
 
 app.hooks(appHooks);
 

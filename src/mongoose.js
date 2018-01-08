@@ -4,7 +4,9 @@ const mt = require('./InitMailTime');
 module.exports = function () {
   const app = this;
 
-  let promise = mongoose.connect(app.get('mongodb'), {
+  const mongoUrl = app.get('env') === 'development' ? app.get('mongodb') : process.env.MONGO_URL;
+
+  let promise = mongoose.connect(mongoUrl, {
     useMongoClient: true
   });
 

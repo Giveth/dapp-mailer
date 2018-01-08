@@ -1,6 +1,7 @@
 # dapp-mailer
 
 > The Giveth Dapp Mailer Notification System
+Sends transactional emails and handles unsubscribes for specific email types.
 
 ## About
 
@@ -10,48 +11,49 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
 Getting up and running is as easy as 1, 2, 3.
 
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-2. Install your dependencies
+1. This project uses node-mailer, which supports different email api's. The default config is using Mailgun, because it is free up to 10k emails/month.
+   You can use Sendgrid, Mailchimp and others, but that needs modification of `InitMailTime.js`
+   Start by creating Mailgun account.
+
+2. Copy `default.json` to `development.json` and enter your Mailgun sandbox credentials as `transportUser` and `transportPass` in this file.
+   *Do not commit this file!* It is already added to .gitignore.
+
+3. Create a random apiSecret and put it in `default.json`. This is just your test API key.
+
+4. Make sure you have [NodeJS](https://nodejs.org/), Mongodb and Yarn (or NPM) installed.
+5. Install your dependencies
 
     ```
-    cd path/to/dapp-mailer; npm install
+    cd path/to/dapp-mailer; yarn install
     ```
 
-3. Start your app
+6. Start your app
 
     ```
-    npm start
+    yarn start
     ```
 
-## Testing
+    Make sure you have Mongo running at port 27017 (or change in the default.json file)
 
-Simply run `npm test` and all your tests in the `test/` directory will be run.
+You can now talk to the api endpoints.
 
-## Scaffolding
 
-Feathers has a powerful command line interface. Here are a few things it can do:
+### Production settings
+copy `default.json` to `production.json` and override all settings there. *Do not deploy this file!*
 
-```
-$ npm install -g feathers-cli             # Install Feathers CLI
+## A note about dependencies
+As you may have noticed many dev dependencies in package.json are not located under devDependencies. 
+The reason is that we use [Now](https://zeit.co/now) to deploy this project, which builds the project from scratch and needs those dependencies.
+If you don't use now, you can move these back to devDependencies.
 
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers generate model                 # Generate a new Model
-$ feathers help                           # Show all commands
-```
+## Deploy
+At Giveth we deploy with [Now](https://zeit.co/now). 
 
-## Help
-
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
-
-## Changelog
-
-__0.1.0__
-
-- Initial release
+To deploy:
+`cd path/to/dapp-mailer; yarn deploy`
 
 ## License
 
-Copyright (c) 2016
+Copyright (c) 2018
 
 Licensed under the [MIT license](LICENSE).

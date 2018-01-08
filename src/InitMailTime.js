@@ -2,18 +2,18 @@ const nodemailer = require('nodemailer');
 const MailTime = require('mail-time');
 const transports = [];
 
-transports.push(nodemailer.createTransport({
-  host: 'smtp.mailgun.org',
-  port: 587,
-  from: 'no-reply@giveth.io',
-  auth: {
-    user: 'postmaster@mg.giveth.io',
-    pass: '3c6aeaaa77ed25ab504909cc43b5f1d7'
-  },
-}));
-
 const createServer = (app, db) => {
   console.log('creating mailtime server');  
+
+  transports.push(nodemailer.createTransport({
+    host: 'smtp.mailgun.org',
+    port: 587,
+    from: app.get('mailSender'),
+    auth: {
+      user: app.get('nodemailer').transportUser,
+      pass: app.get('nodemailer').transportPass
+    },
+  }));
 
   const MailQueue = new MailTime({
     db, // MongoDB
@@ -23,7 +23,7 @@ const createServer = (app, db) => {
     from() {
       // To pass spam-filters `from` field should be correctly set
       // for each transport, check `transport` object for more options
-      return "Giveth <no-reply@giveth.io>";
+      return app.get('mailSender');
     },
     concatEmails: false, // Concatenate emails to the same addressee
     debug: true
