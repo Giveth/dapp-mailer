@@ -25,7 +25,7 @@ const sendEmail = () => (hook) => {
 
   checkRequiredKeys(['recipient', 'template', 'subject', 'secretIntro', 'unsubscribeType', 'unsubscribeReason'], data);
 
-  console.log(data)
+  // console.log(data)
 
   // props should come from data
   const templateProps = _.extend(data, {
