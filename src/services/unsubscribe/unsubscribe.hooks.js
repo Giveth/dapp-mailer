@@ -1,22 +1,14 @@
 import onlyInternal from './../../hooks/onlyInternal';
 
-const unsubscribe = () => (hook) => {
-  const { params, data, service, app } = hook;
-  
-  console.log(params, data);  
-  return hook;
-}
-
-
 module.exports = {
   before: {
-    all: [],
-    find: [unsubscribe()],
-    get: [onlyInternal()],
+    all: [onlyInternal()],
+    find: [],
+    get: [],
     create: [],
-    update: [onlyInternal()],
-    patch: [onlyInternal()],
-    remove: [onlyInternal()]
+    update: [],
+    patch: [],
+    remove: []
   },
 
   after: {

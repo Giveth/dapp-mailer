@@ -27,7 +27,7 @@
     "build": "./node_modules/.bin/babel -d ./build src",
     "start": "babel-watch src ",
     "now-start": "node ./build NODE_ENV=production",
-    "deploy": "now && now alias",    
+    "deploy": "now && now alias && now rm dapp-mailer --safe --yes",    
     "mocha": "mocha test/ --recursive --exit",
     "serve": "yarn build && node ./build NODE_ENV=production"   
   },

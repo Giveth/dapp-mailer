@@ -1,6 +1,6 @@
 {
   "name": "dapp-mailer",
-  "alias": "dmailer.giveth.io",
+  "alias": "dappmailer.giveth.io",
   "files": [
     "src",
     "config/production.json",

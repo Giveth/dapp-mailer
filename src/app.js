@@ -56,6 +56,9 @@ app.configure(middleware);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 
+app.hooks(appHooks);
+
+
 // set view engine to react for server side rendering
 if (app.get('env') === 'development') {
   app.set('view engine', 'jsx');
@@ -65,23 +68,25 @@ if (app.get('env') === 'development') {
   app.engine('js', require('express-react-views').createEngine());
 }
 
-// Configure a middleware for 404s and the error handler
-const publicUri = app.get('public');
-
-app.use(errorHandler({
-  html: {
-    // strings should point to html files
-    403: publicUri + "/403.html",    
-    404: publicUri + "/404.html"
-  }
-}));
-
 // route for our unsubscribe page
 app.get('/unsubscribe-me', (req, res) => {
   unsubscribeMeService(app, req, res);
 });
 
+app.use(notFound());
 
-app.hooks(appHooks);
+// Configure a middleware for 404s and the error handler
+const publicUri = app.get('public');
+
+app.use(errorHandler({
+  html: {
+    // console.log('error', error);
+    // strings should point to html files
+    403: publicUri + "/403.html",    
+    404: publicUri + "/404.html",
+    500: publicUri + "/404.html"
+  }
+}));
+
 
 module.exports = app;
