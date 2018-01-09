@@ -20,21 +20,21 @@ const loadTemplate = (app, type) => {
 
 const sendEmail = () => (hook) => {
   const { params, data, service, app } = hook;
-  const hostUrl = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
-  const unsubscribeUrl = hostUrl + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.type
+  const baseUrl = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
+  const unsubscribeUrl = baseUrl + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.unsubscribeType
 
-  checkRequiredKeys(['recipient', 'subject', 'type'], data);
+  checkRequiredKeys(['recipient', 'template', 'subject', 'secretIntro', 'unsubscribeType', 'unsubscribeReason'], data);
 
   console.log(data)
 
   // props should come from data
   const templateProps = _.extend(data, {
-    hostUrl: hostUrl,
+    baseUrl: baseUrl,
     unsubscribeUrl: unsubscribeUrl     
   })
 
   // first we do a quick check if recipient is unsubscribed for this type of email before sending
-  return app.service('/unsubscribe').find({ query: {email: data.recipient, type: data.type, $limit: 0}})
+  return app.service('/unsubscribe').find({ query: {email: data.recipient, type: data.unsubscribeType, $limit: 0}})
     .then((unsubscribes) => {
       if(unsubscribes.total > 0) {
         hook.result = {
@@ -44,9 +44,9 @@ const sendEmail = () => (hook) => {
         return hook;
       }
 
-      console.log('proceed with sending', unsubscribeUrl);
+      console.log(`no unsubscribes found for ${data.recipient}, proceed with sending`);
 
-      return loadTemplate(app, data.type)
+      return loadTemplate(app, data.template)
         .then((template) => {
 
           // render the template Mustach tags with the props
