@@ -110,6 +110,7 @@ $RECYCLE.BIN/
 # Others
 lib/
 data/
+build/
 *.sublime-workspace
 *.sublime-project
 config/production.json

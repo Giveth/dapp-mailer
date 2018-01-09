@@ -1,0 +1,14 @@
+{
+  "name": "dapp-mailer",
+  "alias": "dmailer.giveth.io",
+  "files": [
+    "src",
+    "config/production.json",
+    ".babelrc",
+    "private",
+    "public"
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

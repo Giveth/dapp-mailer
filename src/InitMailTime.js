@@ -1,9 +1,10 @@
 const nodemailer = require('nodemailer');
 const MailTime = require('mail-time');
 const transports = [];
+const logger = require('winston');
 
 const createServer = (app, db) => {
-  console.log('creating mailtime server');  
+  logger.info('creating mailtime server');  
 
   transports.push(nodemailer.createTransport({
     host: 'smtp.mailgun.org',
@@ -31,7 +32,7 @@ const createServer = (app, db) => {
 }
 
 const createClient = (app, db) => {
-  console.log('creating mailtime client mqClient');  
+  logger.info('creating mailtime client mqClient');  
 
   const MailQueue = new MailTime({
     db, // MongoDB
