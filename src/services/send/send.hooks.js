@@ -1,6 +1,6 @@
 import isAuthorized from './../../hooks/isAuthorized';
 import checkRequiredKeys from './../../hooks/checkRequiredKeys';
-
+const logger = require('winston');
 const fs = require('fs');
 const Mustache = require('mustache');
 const _ = require('lodash');
@@ -23,9 +23,9 @@ const sendEmail = () => (hook) => {
   const baseUrl = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
   const unsubscribeUrl = baseUrl + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.unsubscribeType
 
-  checkRequiredKeys(['recipient', 'template', 'subject', 'secretIntro', 'unsubscribeType', 'unsubscribeReason'], data);
+  logger.info('request sending email', data)
 
-  // console.log(data)
+  checkRequiredKeys(['recipient', 'template', 'subject', 'secretIntro', 'unsubscribeType', 'unsubscribeReason'], data);
 
   // props should come from data
   const templateProps = _.extend(data, {
@@ -44,7 +44,7 @@ const sendEmail = () => (hook) => {
         return hook;
       }
 
-      console.log(`no unsubscribes found for ${data.recipient}, proceed with sending`);
+      logger.info(`no unsubscribes found for ${data.recipient}, proceed with sending`);
 
       return loadTemplate(app, data.template)
         .then((template) => {

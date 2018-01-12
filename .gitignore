@@ -116,3 +116,4 @@ build/
 config/production.json
 config/dev.json
 config/development.json
+*.DS_Store
