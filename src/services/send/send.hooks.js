@@ -64,6 +64,8 @@ const sendEmail = () => (hook) => {
           return hook;
         })
         .catch((e) => {
+          logger.error('Email type not found ', e)
+          
           hook.result = {
             success: false,
             reason: 'email type not found'
@@ -72,7 +74,7 @@ const sendEmail = () => (hook) => {
         })
 
     })
-    .catch((e) => console.log(e));        
+    .catch((e) => logger.error('Could not query unsubscribe service ', e));        
 }
 
 module.exports = {
