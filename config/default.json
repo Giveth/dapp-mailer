@@ -11,6 +11,8 @@
   "apiSecret": "",
   "mailSender": "",
   "nodemailer": {
+    "smtpHost": "smtp.mailgun.org",
+    "smtpPort": 587,
     "transportUser": "",
     "transportPass": ""
   } 

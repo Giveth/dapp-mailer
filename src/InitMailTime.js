@@ -7,8 +7,8 @@ const createServer = (app, db) => {
   logger.info('creating mailtime server');  
 
   transports.push(nodemailer.createTransport({
-    host: 'smtp.mailgun.org',
-    port: 587,
+    host: app.get('nodemailer').smtpHost,
+    port: app.get('nodemailer').smtpPort,
     from: app.get('mailSender'),
     auth: {
       user: app.get('nodemailer').transportUser,
