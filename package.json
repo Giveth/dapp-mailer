@@ -69,7 +69,7 @@
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "eslint": "^4.13.1",
+    "eslint": "^4.18.2",
     "eslint-plugin-react": "^7.20.0",
     "mocha": "^4.0.1"
   }
