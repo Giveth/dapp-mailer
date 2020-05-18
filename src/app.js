@@ -44,10 +44,10 @@ app.configure(rest());
 app.configure(socketio());
 
 // Add additional headers
-app.use(function(req, res, next) { 
-  req.feathers.headers = req.headers;  
+app.use(function(req, res, next) {
+  req.feathers.headers = req.headers;
   req.useragent = req.useragent;
-  next(); 
+  next();
 });
 
 // Configure other middleware (see `middleware/index.js`)
@@ -82,9 +82,9 @@ app.use(errorHandler({
   html: {
     // console.log('error', error);
     // strings should point to html files
-    403: publicUri + "/403.html",    
-    404: publicUri + "/404.html",
-    500: publicUri + "/404.html"
+    403: publicUri + '/403.html',
+    404: publicUri + '/404.html',
+    500: publicUri + '/404.html'
   }
 }));
 

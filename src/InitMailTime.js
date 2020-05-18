@@ -4,7 +4,7 @@ const transports = [];
 const logger = require('winston');
 
 const createServer = (app, db) => {
-  logger.info('creating mailtime server');  
+  logger.info('creating mailtime server');
 
   transports.push(nodemailer.createTransport({
     host: app.get('nodemailer').smtpHost,
@@ -16,6 +16,7 @@ const createServer = (app, db) => {
     },
   }));
 
+  // eslint-disable-next-line no-unused-vars
   const MailQueue = new MailTime({
     db, // MongoDB
     type: 'server',
@@ -29,22 +30,22 @@ const createServer = (app, db) => {
     concatEmails: false, // Concatenate emails to the same addressee
     debug: true
   });
-}
+};
 
 const createClient = (app, db) => {
-  logger.info('creating mailtime client mqClient');  
+  logger.info('creating mailtime client mqClient');
 
   const MailQueue = new MailTime({
     db, // MongoDB
     transports,
     type: 'client',
     debug: true
-  });  
+  });
 
   app.set('mqClient', MailQueue);
-}
+};
 
 module.exports = {
   createServer,
   createClient
-}
+};

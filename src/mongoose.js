@@ -9,16 +9,15 @@ module.exports = function () {
 
   logger.info('Using mongo url', mongoUrl);
 
-  let promise =  mongoose.connect(mongoUrl, {
-    useMongoClient: true
-  });  
+  mongoose.connect(mongoUrl);
+  const db = mongoose.connection;
 
-  promise.then(function(db) {
+  db.on('open', function() {
     // we need to create the mailtime server and client after database loads
     // because db instance needs to be passed
     mt.createServer(app, db);
-    mt.createClient(app, db);    
-  }).catch(() => logger.error('could not connect to mongo'));
+    mt.createClient(app, db);
+  }).catch(err => logger.error('could not connect to mongo', err));
 
   mongoose.Promise = global.Promise;
 
