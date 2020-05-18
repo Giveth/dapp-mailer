@@ -4,34 +4,33 @@ const logger = require('winston');
 const fs = require('fs');
 const Mustache = require('mustache');
 const _ = require('lodash');
-import errors from '@feathersjs/errors';
 
 const loadTemplate = (app, type) => {
   return new Promise((resolve, reject) => {
     fs.readFile(process.env.PWD + app.get('templates') + '/' + type + '.html', (err, data) => {
-      if (err || data === undefined) { 
-        reject(); 
-        return 
-      };
+      if (err || data === undefined) {
+        reject();
+        return;
+      }
       resolve(data.toString());
     });
-  })
-}
+  });
+};
 
 const sendEmail = () => (hook) => {
-  const { params, data, service, app } = hook;
-  const baseUrl = app.get('env') === 'development' ? "http://127.0.0.1:" + app.get('port') : app.get('host');
-  const unsubscribeUrl = baseUrl + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.unsubscribeType
+  const { data, app } = hook;
+  const baseUrl = app.get('env') === 'development' ? 'http://127.0.0.1:' + app.get('port') : app.get('host');
+  const unsubscribeUrl = baseUrl + '/unsubscribe-me?recipient=' + data.recipient + '&type=' + data.unsubscribeType;
 
-  logger.info('request sending email', data)
+  logger.info('request sending email', data);
 
   checkRequiredKeys(['recipient', 'template', 'subject', 'secretIntro', 'unsubscribeType', 'unsubscribeReason'], data);
 
   // props should come from data
   const templateProps = _.extend(data, {
     baseUrl: baseUrl,
-    unsubscribeUrl: unsubscribeUrl     
-  })
+    unsubscribeUrl: unsubscribeUrl
+  });
 
   // first we do a quick check if recipient is unsubscribed for this type of email before sending
   return app.service('/unsubscribe').find({ query: {email: data.recipient, type: data.unsubscribeType, $limit: 0}})
@@ -40,7 +39,7 @@ const sendEmail = () => (hook) => {
         hook.result = {
           success: false,
           reason: 'recipient is unsubscribed'
-        }  
+        };
         return hook;
       }
 
@@ -60,22 +59,22 @@ const sendEmail = () => (hook) => {
             html: template,
           });
 
-          hook.result = { success: true }  
+          hook.result = { success: true };
           return hook;
         })
         .catch((e) => {
-          logger.error('Email type not found ', e)
-          
+          logger.error('Email type not found ', e);
+
           hook.result = {
             success: false,
             reason: 'email type not found'
-          }  
-          return hook;      
-        })
+          };
+          return hook;
+        });
 
     })
-    .catch((e) => logger.error('Could not query unsubscribe service ', e));        
-}
+    .catch((e) => logger.error('Could not query unsubscribe service ', e));
+};
 
 module.exports = {
   before: {
