@@ -9,7 +9,12 @@ module.exports = function () {
 
   logger.info('Using mongo url', mongoUrl);
 
-  mongoose.connect(mongoUrl);
+  mongoose.connect(mongoUrl,
+    {
+      useCreateIndex: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
   const db = mongoose.connection;
 
   db.on('open', function() {
