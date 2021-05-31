@@ -53,7 +53,7 @@
     "feathers-rest": "^1.8.1",
     "feathers-socketio": "^2.0.1",
     "helmet": "^3.9.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "mail-time": "^1.2.4",
     "mongoose": "^5.11.11",
     "mustache": "^2.3.0",
