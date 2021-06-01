@@ -39,7 +39,6 @@
     "@feathersjs/express": "^4.5.11",
     "@feathersjs/feathers": "^4.5.11",
     "@feathersjs/socketio": "^4.5.11",
-    "babel-loader": "^8.2.2",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
@@ -51,8 +50,8 @@
     "mongoose": "^5.12.12",
     "mustache": "^4.2.0",
     "nodemailer": "^6.6.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "serve-favicon": "^2.4.5",
     "winston": "^3.3.3"
   },
