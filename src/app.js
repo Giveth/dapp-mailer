@@ -46,7 +46,6 @@ app.configure(socketio());
 // Add additional headers
 app.use(function(req, res, next) {
   req.feathers.headers = req.headers;
-  req.useragent = req.useragent;
   next();
 });
 
@@ -58,7 +57,6 @@ app.configure(services);
 
 app.hooks(appHooks);
 
-
 // set view engine to react for server side rendering
 if (app.get('env') === 'development') {
   app.set('view engine', 'jsx');
@@ -67,6 +65,7 @@ if (app.get('env') === 'development') {
   app.set('view engine', 'js');
   app.engine('js', require('express-react-views').createEngine());
 }
+app.set('views', path.join(__dirname, 'views'));
 
 // route for our unsubscribe page
 app.get('/unsubscribe-me', (req, res) => {

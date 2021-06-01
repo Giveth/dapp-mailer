@@ -1,11 +1,19 @@
+import { EmailSubscribeTypes } from '../models/types.model';
+
 export default function(app, req, res) {
   const { recipient, type } = req.query;
   const service = app.service('/unsubscribe');
 
-  // check if there's already an unsubscribe
+  if (!Object.values(EmailSubscribeTypes).includes(type)) {
+    return res.render('UnsubscribeMessage', {
+      message: 'Invalid subscribe type!'
+    });
+  }
+
   return service.find({ query: {email: recipient, type: type}})
     .then((unsubscribes) => {
 
+      // check if there's already an unsubscribe
       if(unsubscribes.data.length > 0) {
         res.render('UnsubscribeMessage', {
           message: 'You are already unsubscribed :-)'
