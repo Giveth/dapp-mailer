@@ -1,7 +1,6 @@
 // Initializes the `send` service on path `/send`
 const createService = require('./send.class.js');
 const hooks = require('./send.hooks');
-const filters = require('./send.filters');
 
 module.exports = function () {
   const app = this;
@@ -19,8 +18,4 @@ module.exports = function () {
   const service = app.service('send');
 
   service.hooks(hooks);
-
-  if (service.filter) {
-    service.filter(filters);
-  }
 };

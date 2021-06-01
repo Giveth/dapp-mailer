@@ -1,5 +1,5 @@
 const assert = require('assert');
-const rp = require('request-promise');
+const fetch = require('node-fetch');
 const app = require('../src/app');
 
 describe('Feathers application tests', () => {
@@ -13,33 +13,38 @@ describe('Feathers application tests', () => {
   });
 
   it('starts and shows the index page', () => {
-    return rp('http://localhost:3030').then(body =>
-      assert.ok(body.indexOf('<html>') !== -1)
-    );
+    return fetch('http://localhost:3030')
+      .then(res => res.text())
+      .then(body =>
+        assert.ok(body.indexOf('<html>') !== -1)
+      );
   });
 
   describe('404', function() {
     it('shows a 404 HTML page', () => {
-      return rp({
-        url: 'http://localhost:3030/path/to/nowhere',
+      return fetch('http://localhost:3030/path/to/nowhere', {
         headers: {
           'Accept': 'text/html'
         }
-      }).catch(res => {
-        assert.equal(res.statusCode, 404);
-        assert.ok(res.error.indexOf('<html>') !== -1);
+      }).then(res => {
+        assert.equal(res.status, 404);
+        res.text().then(error => {
+          assert.ok(error);
+          assert.ok(error.indexOf('<html>') !== -1);
+        });
       });
     });
 
     it('shows a 404 JSON error without stack trace', () => {
-      return rp({
-        url: 'http://localhost:3030/path/to/nowhere',
+      return fetch('http://localhost:3030/path/to/nowhere', {
         json: true
-      }).catch(res => {
-        assert.equal(res.statusCode, 404);
-        assert.equal(res.error.code, 404);
-        assert.equal(res.error.message, 'Page not found');
-        assert.equal(res.error.name, 'NotFound');
+      }).then(res => {
+        assert.equal(res.status, 404);
+        res.json().then(error => {
+          assert.equal(error.code, 404);
+          assert.equal(error.message, 'Page not found');
+          assert.equal(error.name, 'NotFound');
+        });
       });
     });
   });

@@ -5,14 +5,25 @@ const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
-const feathers = require('feathers');
-const configuration = require('feathers-configuration');
-const hooks = require('feathers-hooks');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
+const feathers = require('@feathersjs/feathers');
+const configuration = require('@feathersjs/configuration');
+const express = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
+const winston = require('winston');
 
-const errorHandler = require('feathers-errors/handler');
-const notFound = require('feathers-errors/not-found');
+winston.configure({
+  level: 'info',
+  format: winston.format.simple(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    //
+    // - Write all logs with level `error` and below to `error.log`
+    // - Write all logs with level `info` and below to `combined.log`
+    //
+    new winston.transports.Console({ level: 'info' }),
+  ],
+});
+
 import unsubscribeMeService from './services/unsubscribeMeService';
 
 const middleware = require('./middleware');
@@ -21,7 +32,7 @@ const appHooks = require('./app.hooks');
 
 const mongoose = require('./mongoose');
 
-const app = feathers();
+const app = express(feathers());
 
 // Load app configuration
 app.configure(configuration());
@@ -35,12 +46,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 
 // Host the public folder
-app.use('/', feathers.static(app.get('public')));
+app.use('/', express.static(app.get('public')));
 
 // Set up Plugins and providers
-app.configure(hooks());
 app.configure(mongoose);
-app.configure(rest());
+app.configure(express.rest());
 app.configure(socketio());
 
 // Add additional headers
@@ -72,12 +82,12 @@ app.get('/unsubscribe-me', (req, res) => {
   unsubscribeMeService(app, req, res);
 });
 
-app.use(notFound());
+app.use(express.notFound({verbose: false}));
 
 // Configure a middleware for 404s and the error handler
 const publicUri = app.get('public');
 
-app.use(errorHandler({
+app.use(express.errorHandler({
   html: {
     // console.log('error', error);
     // strings should point to html files
