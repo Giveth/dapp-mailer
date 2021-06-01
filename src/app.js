@@ -58,8 +58,13 @@ app.configure(services);
 app.hooks(appHooks);
 
 // set view engine to react for server side rendering
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
+if (app.get('env') === 'development') {
+  app.set('view engine', 'jsx');
+  app.engine('jsx', require('express-react-views').createEngine());
+} else {
+  app.set('view engine', 'js');
+  app.engine('js', require('express-react-views').createEngine());
+}
 app.set('views', path.join(__dirname, 'views'));
 
 // route for our unsubscribe page
