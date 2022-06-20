@@ -1,135 +1,374 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Giveth Email Verification</title>
-  <style>
-@media only screen and (max-width: 620px) {
-  table[class=body] h1 {
-    font-size: 28px !important;
-    margin-bottom: 10px !important;
-  }
+    <style>
+      @media only screen and (max-width: 620px) {
+        table[class="body"] h1 {
+          font-size: 28px !important;
+          margin-bottom: 10px !important;
+        }
 
-  table[class=body] p,
-table[class=body] ul,
-table[class=body] ol,
-table[class=body] td,
-table[class=body] span,
-table[class=body] a {
-    font-size: 16px !important;
-  }
+        table[class="body"] p,
+        table[class="body"] ul,
+        table[class="body"] ol,
+        table[class="body"] td,
+        table[class="body"] span,
+        table[class="body"] a {
+          font-size: 16px !important;
+        }
 
-  table[class=body] .wrapper,
-table[class=body] .article {
-    padding: 10px !important;
-  }
+        table[class="body"] .wrapper,
+        table[class="body"] .article {
+          padding: 10px !important;
+        }
 
-  table[class=body] .content {
-    padding: 0 !important;
-  }
+        table[class="body"] .content {
+          padding: 0 !important;
+        }
 
-  table[class=body] .container {
-    padding: 0 !important;
-    width: 100% !important;
-  }
+        table[class="body"] .container {
+          padding: 0 !important;
+          width: 100% !important;
+        }
 
-  table[class=body] .main {
-    border-left-width: 0 !important;
-    border-radius: 0 !important;
-    border-right-width: 0 !important;
-  }
+        table[class="body"] .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important;
+        }
 
-  table[class=body] .btn table {
-    width: 100% !important;
-  }
+        table[class="body"] .btn table {
+          width: 100% !important;
+        }
 
-  table[class=body] .btn a {
-    width: 100% !important;
-  }
+        table[class="body"] .btn a {
+          width: 100% !important;
+        }
 
-  table[class=body] .img-responsive {
-    height: auto !important;
-    max-width: 100% !important;
-    width: auto !important;
-  }
-}
-@media all {
-  .ExternalClass {
-    width: 100%;
-  }
+        table[class="body"] .img-responsive {
+          height: auto !important;
+          max-width: 100% !important;
+          width: auto !important;
+        }
+      }
+      @media all {
+        .ExternalClass {
+          width: 100%;
+        }
 
-  .ExternalClass,
-.ExternalClass p,
-.ExternalClass span,
-.ExternalClass font,
-.ExternalClass td,
-.ExternalClass div {
-    line-height: 100%;
-  }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%;
+        }
 
-  .apple-link a {
-    color: inherit !important;
-    font-family: inherit !important;
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    line-height: inherit !important;
-    text-decoration: none !important;
-  }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important;
+        }
 
-  .btn-primary table td:hover {
-    background-color: #d5075d !important;
-  }
+        .btn-primary table td:hover {
+          background-color: #d5075d !important;
+        }
 
-  .btn-primary a:hover {
-    background-color: #d5075d !important;
-    border-color: #d5075d !important;
-  }
-}
-</style></head>
-  <body class style="background-color: #e5e5e5; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.4; margin: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; background-color: #E5E5E5; width: 100%;" width="100%" bgcolor="#E5E5E5">
+        .btn-primary a:hover {
+          background-color: #d5075d !important;
+          border-color: #d5075d !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class
+    style="
+      background-color: #e5e5e5;
+      font-family: sans-serif;
+      -webkit-font-smoothing: antialiased;
+      font-size: 16px;
+      line-height: 1.4;
+      margin: 0;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    "
+  >
+    <table
+      role="presentation"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      class="body"
+      style="
+        border-collapse: separate;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        min-width: 100%;
+        background-color: #e5e5e5;
+        width: 100%;
+      "
+      width="100%"
+      bgcolor="#E5E5E5"
+    >
       <tr>
-        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">&nbsp;</td>
-        <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; max-width: 580px; padding: 10px; width: 500px; Margin: 0 auto;" width="500" valign="top">
-          <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
-
+        <td
+          style="font-family: sans-serif; font-size: 14px; vertical-align: top"
+          valign="top"
+        >
+          &nbsp;
+        </td>
+        <td
+          class="container"
+          style="
+            font-family: sans-serif;
+            font-size: 14px;
+            vertical-align: top;
+            display: block;
+            max-width: 580px;
+            padding: 10px;
+            width: 500px;
+            margin: 0 auto;
+          "
+          width="500"
+          valign="top"
+        >
+          <div
+            class="content"
+            style="
+              box-sizing: border-box;
+              display: block;
+              margin: 0 auto;
+              max-width: 580px;
+              padding: 10px;
+            "
+          >
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">This is preheader text. Some clients will show this text as a preview.</span>
-            <table role="presentation" class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; background: #ffffff; border-radius: 3px; width: 100%; border-radius: 16px; padding: 60px 32px;" width="100%">
-                <tr>
-                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">
-                        <div class="header" style="padding-bottom: 32px;">
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; width: 100%;" width="100%">
+            <span
+              class="preheader"
+              style="
+                color: transparent;
+                display: none;
+                height: 0;
+                max-height: 0;
+                max-width: 0;
+                opacity: 0;
+                overflow: hidden;
+                mso-hide: all;
+                visibility: hidden;
+                width: 0;
+              "
+              >Please verify your email</span
+            >
+            <table
+              role="presentation"
+              class="main"
+              style="
+                border-collapse: separate;
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                min-width: 100%;
+                background: #ffffff;
+                border-radius: 3px;
+                width: 100%;
+                border-radius: 16px;
+                padding: 60px 32px;
+              "
+              width="100%"
+            >
               <tr>
-                <td class="align-center" style="font-family: sans-serif; font-size: 14px; vertical-align: top; text-align: center;" valign="top" align="center">
-                  <a href="https://giveth.io"><img src="{{baseUrl}}/images/Giveth-typelogo-purple.svg" height="40" alt="Postdrop" style="border: none; -ms-interpolation-mode: bicubic; max-width: 100%;"></a>
+                <td
+                  style="
+                    font-family: sans-serif;
+                    font-size: 14px;
+                    vertical-align: top;
+                  "
+                  valign="top"
+                >
+                  <div class="header" style="padding-bottom: 32px">
+                    <table
+                      role="presentation"
+                      border="0"
+                      cellpadding="0"
+                      cellspacing="0"
+                      style="
+                        border-collapse: separate;
+                        mso-table-lspace: 0pt;
+                        mso-table-rspace: 0pt;
+                        min-width: 100%;
+                        width: 100%;
+                      "
+                      width="100%"
+                    >
+                      <tr>
+                        <td
+                          class="align-center"
+                          style="
+                            font-family: sans-serif;
+                            font-size: 14px;
+                            vertical-align: top;
+                            text-align: center;
+                          "
+                          valign="top"
+                          align="center"
+                        >
+                          <a href="https://giveth.io"
+                            ><img
+                              src="{{baseUrl}}/images/Giveth-typelogo-purple.png"
+                              height="40"
+                              alt="Postdrop"
+                              style="
+                                border: none;
+                                -ms-interpolation-mode: bicubic;
+                                max-width: 100%;
+                              "
+                          /></a>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
                 </td>
-                    </td>
-                </tr>
+              </tr>
               <!-- START MAIN CONTENT AREA -->
               <tr>
-                <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box;" valign="top">
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; width: 100%;" width="100%">
+                <td
+                  class="wrapper"
+                  style="
+                    font-family: sans-serif;
+                    font-size: 14px;
+                    vertical-align: top;
+                    box-sizing: border-box;
+                  "
+                  valign="top"
+                >
+                  <table
+                    role="presentation"
+                    border="0"
+                    cellpadding="0"
+                    cellspacing="0"
+                    style="
+                      border-collapse: separate;
+                      mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      min-width: 100%;
+                      width: 100%;
+                    "
+                    width="100%"
+                  >
                     <tr>
-                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">
-                        <b class="title" style="font-size: 18px; padding-bottom: 8px;">You're almost there!</b>
-                        <p style="padding: 8px 0; color: #4F576A; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">Please confirm your email address to continue the
-project verification process.</p>
-                        <b>
-                            Why I should do this?
-                        </b>
-                        <p style="padding: 8px 0; color: #4F576A; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                            We need to make sure that we can get in touch with
-you about your project on Giveth.
+                      <td
+                        style="
+                          font-family: sans-serif;
+                          font-size: 14px;
+                          vertical-align: top;
+                        "
+                        valign="top"
+                      >
+                        <b
+                          class="title"
+                          style="font-size: 18px; padding-bottom: 8px"
+                          >You're almost there!</b
+                        >
+                        <p
+                          style="
+                            padding: 8px 0;
+                            color: #4f576a;
+                            font-family: sans-serif;
+                            font-size: 14px;
+                            font-weight: normal;
+                            margin: 0;
+                            margin-bottom: 15px;
+                          "
+                        >
+                          Please confirm your email address to continue the
+                          project verification process.
                         </p>
-                        <a class="button" href="{{dappUrl}}{{ctaRelativeUrl}}" target="_blank" style="color: white; text-decoration: none; font-weight: 700; display: block; background: #5326EC; border-radius: 48px; padding: 16px 32px; text-align: center; font-size: 12px;">VERIFY YOUR EMAIL ADDRESS</a>
-                        <p class="center" style="padding: 8px 0; color: #4F576A; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px; text-align: center;">or copy and paste this link into your browser</p>
-                        <a class="link align-center" href="{{dappUrl}}{{ctaRelativeUrl}}" style="color: #E1458D; text-align: center;">{{dappUrl}}{{ctaRelativeUrl}}
+                        <b> Why I should do this? </b>
+                        <p
+                          style="
+                            padding: 8px 0;
+                            color: #4f576a;
+                            font-family: sans-serif;
+                            font-size: 14px;
+                            font-weight: normal;
+                            margin: 0;
+                            margin-bottom: 15px;
+                          "
+                        >
+                          We need to make sure that we can get in touch with you
+                          about your project on Giveth.
+                        </p>
+                        <a
+                          class="button"
+                          href="{{dappUrl}}{{ctaRelativeUrl}}"
+                          target="_blank"
+                          style="
+                            color: white;
+                            text-decoration: none;
+                            font-weight: 700;
+                            display: block;
+                            background: #5326ec;
+                            border-radius: 48px;
+                            padding: 16px 32px;
+                            text-align: center;
+                            font-size: 12px;
+                          "
+                          >VERIFY YOUR EMAIL ADDRESS</a
+                        >
+                        <p
+                          class="center"
+                          style="
+                            padding: 8px 0;
+                            color: #4f576a;
+                            font-family: sans-serif;
+                            font-size: 14px;
+                            font-weight: normal;
+                            margin: 0;
+                            margin-bottom: 15px;
+                            text-align: center;
+                          "
+                        >
+                          or copy and paste this link into your browser
+                        </p>
+                        <a
+                          class="link align-center"
+                          href="{{dappUrl}}{{ctaRelativeUrl}}"
+                          style="color: #e1458d; text-align: center"
+                          >{{dappUrl}}{{ctaRelativeUrl}}
                         </a>
-                        <p class="bottom" style="padding: 8px 0; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px; padding-top: 16px; border-top: 1px solid #D7DDEA; color: #82899A;">
-                            If you believe you received this email in error, please
-let us know at <a class="mail" href="mailto:info@giveth.io" style="font-weight: 700; text-decoration: none; color: #82899A;">info@giveth.io</a>.
+                        <p
+                          class="bottom"
+                          style="
+                            padding: 8px 0;
+                            font-family: sans-serif;
+                            font-size: 14px;
+                            font-weight: normal;
+                            margin: 0;
+                            margin-bottom: 15px;
+                            padding-top: 16px;
+                            border-top: 1px solid #d7ddea;
+                            color: #82899a;
+                          "
+                        >
+                          If you believe you received this email in error,
+                          please let us know at
+                          <a
+                            class="mail"
+                            href="mailto:info@giveth.io"
+                            style="
+                              font-weight: 700;
+                              text-decoration: none;
+                              color: #82899a;
+                            "
+                            >info@giveth.io</a
+                          >.
                         </p>
                       </td>
                     </tr>
@@ -137,25 +376,78 @@ let us know at <a class="mail" href="mailto:info@giveth.io" style="font-weight: 
                 </td>
               </tr>
 
-            <!-- END MAIN CONTENT AREA -->
+              <!-- END MAIN CONTENT AREA -->
             </table>
 
             <!-- START FOOTER -->
-            <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
-              <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; width: 100%;" width="100%">
-              <tr>
-                <td class="align-center" style="font-family: sans-serif; vertical-align: top; color: #9a9ea6; font-size: 12px; text-align: center;" valign="top" align="center">
-                  <a href="https://giveth.io" style="color: #9a9ea6; font-size: 12px; text-align: center;"><img src="{{baseUrl}}/images/giveth-footer-branding.svg" height="94" alt="Postdrop" style="border: none; -ms-interpolation-mode: bicubic; max-width: 100%;"></a>
-                </td>
-              </tr>
-            </table>
+            <div
+              class="footer"
+              style="
+                clear: both;
+                margin-top: 10px;
+                text-align: center;
+                width: 100%;
+              "
+            >
+              <table
+                role="presentation"
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                style="
+                  border-collapse: separate;
+                  mso-table-lspace: 0pt;
+                  mso-table-rspace: 0pt;
+                  min-width: 100%;
+                  width: 100%;
+                "
+                width="100%"
+              >
+                <tr>
+                  <td
+                    class="align-center"
+                    style="
+                      font-family: sans-serif;
+                      vertical-align: top;
+                      color: #9a9ea6;
+                      font-size: 12px;
+                      text-align: center;
+                    "
+                    valign="top"
+                    align="center"
+                  >
+                    <a
+                      href="https://giveth.io"
+                      style="
+                        color: #9a9ea6;
+                        font-size: 12px;
+                        text-align: center;
+                      "
+                      ><img
+                        src="{{baseUrl}}/images/giveth-footer-branding.png"
+                        height="94"
+                        alt="Postdrop"
+                        style="
+                          border: none;
+                          -ms-interpolation-mode: bicubic;
+                          max-width: 100%;
+                        "
+                    /></a>
+                  </td>
+                </tr>
+              </table>
             </div>
             <!-- END FOOTER -->
 
-          <!-- END CENTERED WHITE CONTAINER -->
+            <!-- END CENTERED WHITE CONTAINER -->
           </div>
         </td>
-        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">&nbsp;</td>
+        <td
+          style="font-family: sans-serif; font-size: 14px; vertical-align: top"
+          valign="top"
+        >
+          &nbsp;
+        </td>
       </tr>
     </table>
   </body>
